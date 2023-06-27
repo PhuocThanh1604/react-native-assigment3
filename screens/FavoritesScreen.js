@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     paddingBottom: 20,
+    padding:10
   },
   orchidItemContainer: {
     marginBottom: 20,
@@ -99,7 +100,7 @@ const styles = StyleSheet.create({
   header: {
     alignItems: 'center',
     justifyContent: 'center',
-    height: 100,
+    height: 140,
     backgroundColor: 'white',
     borderBottomWidth: 1,
     borderBottomColor: 'white',
@@ -109,6 +110,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#9acd32',
   },
   headerText: {
+    marginTop:10,
     fontSize: 20,
     fontWeight: 'bold',
   },

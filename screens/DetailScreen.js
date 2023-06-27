@@ -1,17 +1,9 @@
 import React, { useState, useContext, useEffect } from 'react';
-import {
-  View,
-  Text,
-  Button,
-  StyleSheet,
-  Animated,
-  TouchableOpacity,
-  Image,
-  ScrollView,
-  SafeAreaView
-} from 'react-native';
+import { View, Text, StyleSheet, Animated, Image, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { Button, Card, Title, Paragraph } from 'react-native-paper';
 import { FavoriteOrchidsContext } from './FavoriteOrchidsContext';
+import { FontAwesome } from '@expo/vector-icons';
 const DetailScreen = ({ route, maxLines = 3 }) => {
   const [showFullContent, setShowFullContent] = useState(false);
   const [quantity, setQuantity] = useState(1);
@@ -95,62 +87,72 @@ const DetailScreen = ({ route, maxLines = 3 }) => {
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         {orchid && (
-          <View style={styles.contentContainer}>
-            <View style={styles.headerContainer}>
-              <View style={styles.titleContainer}>
-                <Text style={styles.headerTitle}>
+          <Card style={styles.contentContainer}>
+            <Card.Content>
+              <View style={styles.headerContainer}>
+                <Title style={styles.headerTitle}>
                   {orchid.name.toUpperCase()}
-                </Text>
-                <TouchableOpacity onPress={handleToggleFavorite}>
-                  <Animated.View
-                    style={[{ transform: [{ scale: heartScale }] }]}>
-                    <Text style={styles.heart}>{isFavorite ? '❤️' : '♡'}</Text>
-                  </Animated.View>
-                </TouchableOpacity>
+                </Title>
+                <Animated.View
+                  style={[{ transform: [{ scale: heartScale }] }]}>
+                  <FontAwesome
+                    style={styles.heart}
+                    onPress={handleToggleFavorite}
+                    name={isFavorite ? 'heart' : 'heart-o'}
+
+                  >
+                  </FontAwesome>
+                </Animated.View>
               </View>
-            </View>
-            <Image source={orchid.image} style={styles.image} />
-            <View style={styles.priceContainer}>
-              <Text style={styles.priceText}>
-                {orchid.price.toLocaleString()} &#8363;
-              </Text>
-            </View>
-            <View style={styles.priceContainer}>
-              <Text style={styles.priceText}>
-                Catgeory:
-                {orchid.category}
-              </Text>
-            </View>
-            <Text
-              numberOfLines={showFullContent ? undefined : maxLines}
-              ellipsizeMode="tail"
-              style={styles.description}>
-              {orchid.desc}
-            </Text>
-            {!showFullContent && (
-              <TouchableOpacity onPress={toggleContent}>
-                <Text style={styles.viewMore}>Xem thêm +</Text>
-              </TouchableOpacity>
-            )}
-          </View>
+              <Card.Cover source={orchid.image} style={styles.image} />
+              <Paragraph style={styles.priceText}>
+              Giá: {orchid.price.toLocaleString()} &#8363;
+              </Paragraph>
+              <Paragraph style={styles.categoryText}>
+                Loại:
+                {orchid.category} ;
+              </Paragraph>
+              <Paragraph
+                numberOfLines={showFullContent ? undefined : maxLines}
+                ellipsizeMode="tail"
+                style={styles.description}
+              >
+                {orchid.desc}
+              </Paragraph>
+              {!showFullContent && (
+                <Text style={styles.viewMore} onPress={toggleContent}>
+                  Xem thêm +
+                </Text>
+              )}
+            </Card.Content>
+          </Card>
         )}
       </ScrollView>
       <View style={styles.buttonContainer}>
         <View style={styles.buyContainer}>
-          <Button 
-            title="Mua"
+          <Button
+            mode="contained"
             onPress={handleBuy}
-            color="green" // Màu sắc của nút Buy
-          />
+            color="green"
+            labelStyle={{ color: '#ffffff' }}
+          >
+            Mua
+          </Button>
         </View>
         <View style={styles.quantityContainer}>
-          <TouchableOpacity onPress={handleDecreaseQuantity}>
-            <Text style={styles.quantityButton}>-</Text>
-          </TouchableOpacity>
+          <Text
+            style={styles.quantityButton}
+            onPress={handleDecreaseQuantity}
+          >
+            -
+          </Text>
           <Text style={styles.quantityText}>{quantity}</Text>
-          <TouchableOpacity onPress={handleIncreaseQuantity}>
-            <Text style={styles.quantityButton}>+</Text>
-          </TouchableOpacity>
+          <Text
+            style={styles.quantityButton}
+            onPress={handleIncreaseQuantity}
+          >
+            +
+          </Text>
         </View>
       </View>
     </View>
@@ -159,14 +161,19 @@ const DetailScreen = ({ route, maxLines = 3 }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1.4,
-    // backgroundColor: '#f0f8ff', // Màu nền tổng thể
-    padding: 18,
+    flex: 1,
+    padding: 10,
+    backgroundColor: '#f0f8ff',
+    elevation: 6, // Hiệu ứng shadow cho Android
+    shadowColor: '#a52a2a', // Màu shadow
+    shadowOffset: { width: 2, height: 4 }, // Độ dịch chuyển shadow
+    shadowOpacity: 0.5, // Độ mờ shadow
+    shadowRadius: 100, // Độ cong mép của shadow
   },
   contentContainer: {
-    backgroundColor: '#ffffff', // Màu nền phần nội dung
     borderRadius: 20,
     padding: 10,
+    backgroundColor: 'white',
   },
   image: {
     width: 360,
@@ -174,6 +181,11 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
     borderRadius: 10,
     marginBottom: 10,
+    elevation: 6, // Hiệu ứng shadow cho Android
+    shadowColor: '#a52a2a', // Màu shadow
+    shadowOffset: { width: 2, height: 4 }, // Độ dịch chuyển shadow
+    shadowOpacity: 0.5, // Độ mờ shadow
+    shadowRadius: 100, // Độ cong mép của shadow
   },
   scrollViewContent: {
     flexGrow: 1,
@@ -185,42 +197,29 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 16,
   },
-  backButton: {
-    fontSize: 18,
-    color: 'blue',
-    marginRight: 10,
-  },
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginLeft: 4, // Khoảng cách trái của heartContainer và headerTitle
-  },
   headerTitle: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: 'blue', // Màu cho title
+    color: 'blue',
     marginRight: 160,
-  },
-  heartContainer: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    borderWidth: 1,
-    borderColor: 'red',
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   heart: {
     fontSize: 24,
     color: 'red',
   },
-  priceContainer: {
-    marginLeft: 8,
-  },
   priceText: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: 'green', // Màu cho giá
+    color: 'green',
+    marginLeft: 8,
+  },
+  categoryText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: 'green',
+    marginLeft: 8,
+    marginTop: 8,
+    
   },
   description: {
     fontSize: 16,
@@ -229,8 +228,10 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   viewMore: {
+    fontSize: 16,
     color: 'red',
-    marginTop: 8,
+    marginTop: 2,
+    marginLeft: 8,
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -242,7 +243,7 @@ const styles = StyleSheet.create({
   buyContainer: {
     flex: 1,
     marginRight: 8,
-    backgroundColor: '#f0f8ff', // Màu nền của nút Buy
+    backgroundColor: '#f0f8ff',
     borderRadius: 5,
   },
   quantityContainer: {
@@ -250,8 +251,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth: 2,
     borderColor: '#ccc',
-    borderRadius: 8,
+    borderRadius: 20,
     paddingHorizontal: 10,
+    backgroundColor: 'white',
   },
   quantityButton: {
     fontSize: 30,

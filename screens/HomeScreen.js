@@ -14,9 +14,9 @@ import {
 } from 'react-native';
 import { FavoriteOrchidsContext } from './FavoriteOrchidsContext';
 import * as Animatable from 'react-native-animatable';
-import Icon from 'react-native-vector-icons/Feather';
+// import Icon from 'react-native-vector-icons/Feather';
 import unorm from 'unorm';
-
+import Icon from 'react-native-vector-icons/FontAwesome';
 const HomeScreen = ({ navigation }) => {
   const categories = [
     { id: 1, name: 'Tất cả', icon: 'list' },
@@ -32,6 +32,7 @@ const HomeScreen = ({ navigation }) => {
       date: '17/08/2020',
       image: require('../images/orchid1.jpg'),
       category: 'Địa lan',
+      quantity:50,
       desc: 'Loại cây này thường được trồng ở trong chậu hoặc thường sống trong đất, thuộc loại cây thân thảo, phù hợp với môi trường sống ở ngoài trời hoặc ở trong bóng râm. Trong quá trình chăm sóc, loại cây này thường có nguy cơ bị héo và hay gặp phải các loại mầm bệnh gây hư hỏng cây, bị úng nước hoặc gãy hoa khi gặp phải thời tiết khắc nghiệt như mưa gió quá lớn nhưng không có biện pháp khắc phục tốt.',
     },
     {
@@ -41,6 +42,7 @@ const HomeScreen = ({ navigation }) => {
       date: '17/08/2020',
       category: 'Phong lan',
       image: require('../images/orchid2.jpg'),
+      quantity:40,
       desc: 'Sở dĩ loại Lan này được gọi như vậy là do ngoại hình của chúng có các thua xòe ra ở bộ lưỡi và cánh hoa. Đây là loài Lan có màu sắc rực rỡ và nổi bật. Nếu chăm sóc tốt Lan Hoàng Thảo có thể được bán với giá cao. Loại Lan này phát triển với tốc độ nhanh, dễ trồng chỉ cần cung cấp cho nó đầy đủ các chất dinh dưỡng cần thiết.',
     },
     {
@@ -50,6 +52,7 @@ const HomeScreen = ({ navigation }) => {
       date: '17/08/2020',
       image: require('../images/orchid3.jpg'),
       category: 'Địa lan',
+      quantity:16,
       desc: 'Lan Hồ Điệp với những cánh hoa có hình dạng như những con bướm đang bay lượn. Loại Lan này có có tên khoa học là Phalaenopsis.',
     },
     {
@@ -59,6 +62,7 @@ const HomeScreen = ({ navigation }) => {
       date: '17/08/2020',
       image: require('../images/orchid4.jpg'),
       category: 'Địa lan',
+      quantity:8,
       desc: 'Loại cây này thường được trồng ở trong chậu hoặc thường sống trong đất, thuộc loại cây thân thảo, phù hợp với môi trường sống ở ngoài trời hoặc ở trong bóng râm. Trong quá trình chăm sóc, loại cây này thường có nguy cơ bị héo và hay gặp phải các loại mầm bệnh gây hư hỏng cây, bị úng nước hoặc gãy hoa khi gặp phải thời tiết khắc nghiệt như mưa gió quá lớn nhưng không có biện pháp khắc phục tốt.',
     },
     {
@@ -67,6 +71,7 @@ const HomeScreen = ({ navigation }) => {
       price: '9000',
       date: '17/08/2020',
       category: 'Bán địa lan',
+      quantity:9,
       image: require('../images/orchid9.jpg'),
       desc: 'Sở dĩ loại Lan này được gọi như vậy là do ngoại hình của chúng có các thua xòe ra ở bộ lưỡi và cánh hoa. Đây là loài Lan có màu sắc rực rỡ và nổi bật. Nếu chăm sóc tốt Lan Hoàng Thảo có thể được bán với giá cao. Loại Lan này phát triển với tốc độ nhanh, dễ trồng chỉ cần cung cấp cho nó đầy đủ các chất dinh dưỡng cần thiết.',
     },
@@ -75,6 +80,7 @@ const HomeScreen = ({ navigation }) => {
       name: 'Lan Hỏa Hoàng Cam',
       price: '180000',
       date: '17/6/2023',
+      quantity:14,
       image: require('../images/orchid10.jpg'),
       category: 'Phong lan',
       desc: 'Lan Hồ Điệp với những cánh hoa có hình dạng như những con bướm đang bay lượn. Loại Lan này có có tên khoa học là Phalaenopsis.',
@@ -85,6 +91,7 @@ const HomeScreen = ({ navigation }) => {
       price: '120000',
       date: '12/01/2023',
       category: 'Địa lan',
+      quantity:100,
       image: require('../images/orchid8.jpg'),
       desc: 'Loại cây này thường được trồng ở trong chậu hoặc thường sống trong đất, thuộc loại cây thân thảo, phù hợp với môi trường sống ở ngoài trời hoặc ở trong bóng râm. Trong quá trình chăm sóc, loại cây này thường có nguy cơ bị héo và hay gặp phải các loại mầm bệnh gây hư hỏng cây, bị úng nước hoặc gãy hoa khi gặp phải thời tiết khắc nghiệt như mưa gió quá lớn nhưng không có biện pháp khắc phục tốt.',
     },
@@ -93,6 +100,7 @@ const HomeScreen = ({ navigation }) => {
       name: 'Lan Tam Bảo Sắc',
       price: '79000',
       date: '17/08/2020',
+      quantity:18,
       category: 'Phong lan',
       image: require('../images/orchid7.jpg'),
       desc: 'Sở dĩ loại Lan này được gọi như vậy là do ngoại hình của chúng có các thua xòe ra ở bộ lưỡi và cánh hoa. Đây là loài Lan có màu sắc rực rỡ và nổi bật. Nếu chăm sóc tốt Lan Hoàng Thảo có thể được bán với giá cao. Loại Lan này phát triển với tốc độ nhanh, dễ trồng chỉ cần cung cấp cho nó đầy đủ các chất dinh dưỡng cần thiết.',
@@ -102,6 +110,7 @@ const HomeScreen = ({ navigation }) => {
       name: 'Hoa Lan Cẩm Cù',
       price: '50000',
       date: '7/3/2023',
+      quantity:13,
       category: 'Địa lan',
       image: require('../images/orchid6.jpg'),
       desc: 'Lan Hồ Điệp với những cánh hoa có hình dạng như những con bướm đang bay lượn. Loại Lan này có có tên khoa học là Phalaenopsis.',
@@ -112,6 +121,7 @@ const HomeScreen = ({ navigation }) => {
       price: '30000',
       date: '17/08/2020',
       category: 'Phong lan',
+      quantity:19,
       image: require('../images/orchid5.jpg'),
       desc: 'Lan Hồ Điệp với những cánh hoa có hình dạng như những con bướm đang bay lượn. Loại Lan này có có tên khoa học là Phalaenopsis.',
     },
@@ -203,10 +213,10 @@ const HomeScreen = ({ navigation }) => {
               {item.name}
             </Text>
             <Text style={[styles.orchidPrice, { color: 'green' }]}>
-              Giá: {item.price} VNĐ
+              Giá: {item.price}&#8363;
             </Text>
             <Text style={[styles.orchidCategory, { color: 'blue' }]}>
-              Loại: {item.category}
+              Số lượng: {item.quantity}
             </Text>
             {/* {favoriteOrchids.some((orchid) => orchid.id === item.id) && (
           <Icon
@@ -278,8 +288,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f0f8ff',
-    // paddingHorizontal: 12,
-    // borderColor: 'red',
     overflow: 'visible',
   },
   heading: {
@@ -288,44 +296,21 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     marginBottom: 20,
   },
-
-  // header: {
-  //   backgroundColor: 'white',
-  //   height: 100,
-  //   justifyContent: 'center',
-  //   alignItems: 'center',
-  //   width: '100%',
-  //   shadowColor: 'black',
-  //   shadowOffset: { width: 0, height: 2 },
-  //   shadowOpacity: 0.8,
-  //   shadowRadius: 4,
-  //   elevation: 2,
-  //   marginBottom:20,
-  //   borderRadius:20,
-  //   borderBottomColor: 'gray',
-  //   marginBottom: 20,
-  //   borderBottomWidth: 1,
-  //   borderBottomColor: 'gray',
-  // },
   header: {
-    // position: 'absolute',
-    // top: 0,
-    // left: 0,
-    // right: 0,
     alignItems: 'center',
     justifyContent: 'center',
-    height: 100,
-    backgroundColor: 'white',
+    height: 140,
     borderBottomWidth: 1,
     borderBottomColor: 'white',
     marginBottom: 10,
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
+    borderBottomLeftRadius: 26,
+    borderBottomRightRadius: 26,
     backgroundColor: '#9acd32',
   },
   headerText: {
     fontSize: 20,
     fontWeight: 'bold',
+    marginTop:10,
   },
   orchidContainer: {
     borderWidth: 1.6,
