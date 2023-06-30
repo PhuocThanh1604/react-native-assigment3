@@ -1,5 +1,12 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { View, Text, StyleSheet, Animated, Image, ScrollView } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Animated,
+  Image,
+  ScrollView,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Button, Card, Title, Paragraph } from 'react-native-paper';
 import { FavoriteOrchidsContext } from './FavoriteOrchidsContext';
@@ -8,7 +15,7 @@ const DetailScreen = ({ route, maxLines = 3 }) => {
   const [showFullContent, setShowFullContent] = useState(false);
   const [quantity, setQuantity] = useState(1);
 
-  const { orchid } = route.params;
+  const { orchid, selectedOrchidId } = route.params;
   const [isFavorite, setIsFavorite] = useState(false);
   const [animation] = useState(new Animated.Value(1));
   const { favoriteOrchids, setFavoriteOrchids } = useContext(
@@ -93,30 +100,27 @@ const DetailScreen = ({ route, maxLines = 3 }) => {
                 <Title style={styles.headerTitle}>
                   {orchid.name.toUpperCase()}
                 </Title>
-                <Animated.View
-                  style={[{ transform: [{ scale: heartScale }] }]}>
+                <Animated.View style={[{ transform: [{ scale: heartScale }] }]}>
                   <FontAwesome
                     style={styles.heart}
-                    onPress={handleToggleFavorite}
-                    name={isFavorite ? 'heart' : 'heart-o'}
-
-                  >
-                  </FontAwesome>
+                    onPress={() => handleToggleFavorite(orchid)}
+                    name={isFavorite ? 'heart' : 'heart-o'}></FontAwesome>
                 </Animated.View>
               </View>
               <Card.Cover source={orchid.image} style={styles.image} />
               <Paragraph style={styles.priceText}>
-              Giá: {orchid.price.toLocaleString()} &#8363;
+                Giá: {orchid.price.toLocaleString()} &#8363;
               </Paragraph>
               <Paragraph style={styles.categoryText}>
-                Loại:
-                {orchid.category} ;
+                Loại: {orchid.category}
+              </Paragraph>
+              <Paragraph style={styles.categoryText}>
+                Loại: {orchid.quantity}
               </Paragraph>
               <Paragraph
                 numberOfLines={showFullContent ? undefined : maxLines}
                 ellipsizeMode="tail"
-                style={styles.description}
-              >
+                style={styles.description}>
                 {orchid.desc}
               </Paragraph>
               {!showFullContent && (
@@ -134,23 +138,16 @@ const DetailScreen = ({ route, maxLines = 3 }) => {
             mode="contained"
             onPress={handleBuy}
             color="green"
-            labelStyle={{ color: '#ffffff' }}
-          >
+            labelStyle={{ color: '#ffffff' }}>
             Mua
           </Button>
         </View>
         <View style={styles.quantityContainer}>
-          <Text
-            style={styles.quantityButton}
-            onPress={handleDecreaseQuantity}
-          >
+          <Text style={styles.quantityButton} onPress={handleDecreaseQuantity}>
             -
           </Text>
           <Text style={styles.quantityText}>{quantity}</Text>
-          <Text
-            style={styles.quantityButton}
-            onPress={handleIncreaseQuantity}
-          >
+          <Text style={styles.quantityButton} onPress={handleIncreaseQuantity}>
             +
           </Text>
         </View>
@@ -219,7 +216,6 @@ const styles = StyleSheet.create({
     color: 'green',
     marginLeft: 8,
     marginTop: 8,
-    
   },
   description: {
     fontSize: 16,

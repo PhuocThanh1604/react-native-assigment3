@@ -18,11 +18,11 @@ function OrchidsOverview() {
         headerShown: false,
       }}
       tabBarOptions={{
-        activeTintColor: 'black', // Màu cho Tab được chọn
-        inactiveTintColor: 'white', // Màu cho Tab không được chọn
+        activeTintColor: 'black', 
+        inactiveTintColor: 'white',
       }}
       tabBarStyle={{
-        backgroundColor: '#9acd32', // Màu nền cho Tab
+        backgroundColor: '#9acd32', 
       }}
     >
       <Tab.Screen
@@ -34,7 +34,7 @@ function OrchidsOverview() {
             <Ionicons name="list" size={size} color={color}></Ionicons>
           ),
           tabBarStyle: {
-            backgroundColor: '#9acd32', // Màu nền cho Tab Home
+            backgroundColor: '#9acd32',
           },
         }}
       />
